@@ -7,24 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class ApiInvoiceUtsApplication implements CommandLineRunner {
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+public class ApiInvoiceUtsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiInvoiceUtsApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		String password = "00000";
-		
-		for (int i = 0; i < 4; i++) {
-			String passwordBcrypt = passwordEncoder.encode(password);
-			System.out.println(passwordBcrypt);
-		}
-		
 	}
 
 }

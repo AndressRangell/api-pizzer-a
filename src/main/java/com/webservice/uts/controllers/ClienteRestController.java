@@ -1,32 +1,19 @@
 package com.webservice.uts.controllers;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import javax.validation.Valid;
-
+import com.webservice.uts.models.entites.Cliente;
+import com.webservice.uts.models.services.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-
-import com.webservice.uts.models.services.IClienteService;
-import com.webservice.uts.models.entites.Cliente;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @CrossOrigin(origins = {"http://localhost:4200"})
@@ -42,13 +29,11 @@ public class ClienteRestController {
         return clienteService.findAll();
     }
 
-    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @GetMapping("/cliente/{id}")
     public Cliente show(@PathVariable Long id) {
         return clienteService.findById(id);
     }
 
-    @Secured({"ROLE_ADMIN"})
     @PostMapping("/cliente")
     public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
 
@@ -81,7 +66,6 @@ public class ClienteRestController {
 
     }
 
-    @Secured({"ROLE_ADMIN"})
     @PutMapping("/cliente/{id}")
     public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
 
@@ -126,7 +110,6 @@ public class ClienteRestController {
 
     }
 
-    @Secured({"ROLE_ADMIN"})
     @DeleteMapping("/cliente/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<?> delete(@PathVariable Long id) {
@@ -147,12 +130,5 @@ public class ClienteRestController {
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
-
-    @Secured("ROLE_ADMIN")
-    @GetMapping("/cliente/")
-    public List<Cliente> listarClientes() {
-        return clienteService.findAllClients();
-    }
-
 
 }

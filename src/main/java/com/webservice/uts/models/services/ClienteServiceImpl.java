@@ -55,12 +55,6 @@ public class ClienteServiceImpl  implements IClienteService {
 	}
 	
 	@Override
-	@Transactional(readOnly = true)
-	public List<Cliente> findAllClients() {
-		return clienteDao.findAllClients();
-	}
-	
-	@Override
 	@Transactional(readOnly=true)
 	public Pedido findPedidoById(Long id) {
 		return pedidoDao.findById(id).orElse(null);
@@ -82,7 +76,7 @@ public class ClienteServiceImpl  implements IClienteService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Pizza> findPizzaByName(String term) {
-		return pizzaDao.findByNombreContainingIgnoreCase(term);
+		return pizzaDao.findByNombre(term);
 	}
 
 	@Override

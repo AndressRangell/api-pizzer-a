@@ -17,9 +17,7 @@ public interface IClienteService {
 	
 	public void delete(Cliente cliente);
 	
-	public List<Cliente> findAllClients();
-	
-        public Pedido findPedidoById(Long id);
+	public Pedido findPedidoById(Long id);
 	
 	public List<Pedido> findAllPedidos();
 	
